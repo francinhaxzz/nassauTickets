@@ -7,28 +7,33 @@ const dotenv = require("dotenv");
 // Carrega as variáveis de ambiente.
 dotenv.config();
 
+// Importa as rotas relacionadas aos guichês.
+const guicheRoutes = require("./routes/guicheRoutes");
+
 // Cria a aplicação Express.
 const app = express();
 
-// Define a porta do servidor.
-// Caso nenhuma porta seja informada, utiliza a porta 3000.
+// Define a porta utilizada pelo servidor.
 const PORT = process.env.PORT || 3000;
 
-// Permite que o servidor receba informações no formato JSON.
+// Permite que a aplicação receba dados no formato JSON.
 app.use(express.json());
 
-// Cria uma rota GET na raiz da API.
+// Cria uma rota simples para verificar se a API está funcionando.
 app.get("/", (req, res) => {
 
-    // Retorna uma resposta no formato JSON.
+    // Retorna uma resposta JSON.
     res.json({
         mensagem: "API nassauTickets funcionando!"
     });
 });
 
+// Define o endereço das rotas relacionadas aos guichês.
+app.use("/api/guiches", guicheRoutes);
+
 // Inicia o servidor.
 app.listen(PORT, () => {
 
-    // Exibe no terminal a porta utilizada pelo servidor.
+    // Exibe uma mensagem no terminal.
     console.log(`Servidor nassauTickets rodando na porta ${PORT}`);
 });
