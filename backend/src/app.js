@@ -10,6 +10,9 @@ dotenv.config();
 // Importa as rotas relacionadas aos guichês.
 const guicheRoutes = require("./routes/guicheRoutes");
 
+// Importa as rotas relacionadas as senhas
+const senhaRoutes = require("./routes/senhaRoutes");
+
 // Cria a aplicação Express.
 const app = express();
 
@@ -30,6 +33,9 @@ app.get("/", (req, res) => {
 
 // Define o endereço das rotas relacionadas aos guichês.
 app.use("/api/guiches", guicheRoutes);
+
+// Uso das rotas da senha
+app.use("/api/senhas", senhaRoutes);
 
 // Inicia o servidor.
 app.listen(PORT, () => {
