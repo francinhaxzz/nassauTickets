@@ -1,139 +1,98 @@
-# 🎫 nassauTickets
+# nassauTickets
 
-Sistema de Controle de Atendimento para um Laboratório de Análises Clínicas.
+Sistema Web para Controle de Atendimento desenvolvido como projeto acadêmico da UNINASSAU.
 
-## 📋 Descrição
+O **nassauTickets** tem como objetivo organizar e controlar o atendimento de um Laboratório de Análises Clínicas por meio da emissão, gerenciamento e chamada de senhas.
 
-O **nassauTickets** é um projeto de aplicação web para gerenciamento do fluxo de atendimento de um Laboratório de Análises Clínicas.
+> **Status do projeto:** Em desenvolvimento — Primeira fase.
 
-O sistema deverá permitir a emissão de senhas, organização das filas de atendimento por prioridade, chamada de clientes nos guichês, acompanhamento das chamadas por meio de um painel e geração de relatórios.
+---
 
-O projeto também tem como foco a aplicação de boas práticas de organização, documentação, versionamento e desenvolvimento de software.
+## Objetivo
 
-## 🎯 Objetivo
+Desenvolver uma aplicação Web capaz de auxiliar no controle do fluxo de atendimento de um laboratório, contemplando a emissão de senhas, gerenciamento de filas, chamadas nos guichês e acompanhamento dos atendimentos.
 
-Desenvolver um sistema web capaz de controlar o processo de atendimento de um laboratório, desde a emissão da senha até a finalização do atendimento.
-
-Durante o desenvolvimento serão aplicados conhecimentos de:
+O projeto também tem como objetivo aplicar conhecimentos relacionados a:
 
 - Desenvolvimento Web;
 - React;
+- Node.js e Express;
+- Banco de dados MySQL;
 - APIs REST;
-- Node.js;
-- Banco de dados;
 - Git e GitHub;
+- Modelagem de sistemas;
 - Documentação de software;
-- Organização e reutilização de componentes;
-- Integração entre frontend, backend e banco de dados.
+- Trabalho colaborativo e versionamento.
 
-## 👥 Membros
+---
+
+## Membros
 
 | Nome | Matrícula | Papel |
-| --- | --- | --- |
+|---|---|---|
 | Mateus França Toledo | 01800414 | Scrum Master |
 | Ygor Lopes de Queiroz | 01802997 | Documentador |
 | Victor Emanuel dos Santos Brito | 01807084 | Desenvolvedor |
 | Pedro Henrique de Oliveira Gomes | 01810750 | Testador |
 
-### Responsabilidades
+---
 
-- **Scrum Master:** responsável pela organização do repositório e coordenação das atividades relacionadas ao projeto.
-- **Documentador:** responsável pela produção e organização da documentação.
-- **Desenvolvedor:** responsável pela implementação e evolução do código.
-- **Testador:** responsável pela verificação do funcionamento, identificação de problemas e validação das funcionalidades.
-
-## 🛠️ Tecnologias
+## Tecnologias
 
 ### Frontend
 
-- React;
-- Vite;
-- JavaScript;
-- HTML;
-- CSS.
+- React
+- JavaScript
+- HTML
+- CSS
 
 ### Backend
 
-- Node.js 22 LTS;
-- Express.
+- Node.js 22 LTS
+- Express
 
 ### Banco de Dados
 
-- MySQL 8.0.
+- MySQL 8.0
+- mysql2
 
-### Versionamento
+### Desenvolvimento e Versionamento
 
-- Git;
-- GitHub.
+- Git
+- GitHub
+- Visual Studio Code
 
-## 🏗️ Arquitetura e Visão Geral
+---
 
-O sistema trabalha com três agentes principais:
+## Visão Geral do Sistema
+
+O nassauTickets foi projetado para trabalhar com três agentes principais:
 
 ### AS — Agente Sistema
 
-Responsável pelas ações internas do sistema, comunicação com o banco de dados e demais infraestruturas, emissão das senhas, atualização do painel e resposta aos comandos dos demais agentes.
+Responsável pelas operações automáticas do sistema, comunicação com o banco de dados, emissão e gerenciamento das senhas e atualização das informações apresentadas aos usuários.
 
 ### AA — Agente Atendente
 
-Responsável por chamar o próximo cliente e realizar o atendimento no guichê.
+Responsável por chamar clientes, iniciar atendimentos e finalizar os serviços realizados nos guichês.
 
 ### AC — Agente Cliente
 
-Responsável por emitir sua senha por meio do totem e aguardar sua chamada no painel.
+Responsável por solicitar uma senha por meio do sistema e aguardar sua chamada para atendimento.
 
-A arquitetura planejada para a aplicação é:
+---
 
-```text
-Cliente / Atendente
-        │
-        ▼
-     Frontend
-   React + Vite
-        │
-        │ API REST
-        ▼
-      Backend
- Node.js + Express
-        │
-        ▼
-      MySQL
-```
+## Tipos de Senha
 
-## 🎟️ Tipos de Senha
+O sistema utiliza três tipos de senha:
 
-O sistema deverá trabalhar com três tipos de senha:
-
-| Código | Tipo |
-| --- | --- |
+| Tipo | Descrição |
+|---|---|
 | `SP` | Senha Prioritária |
 | `SG` | Senha Geral |
-| `SE` | Senha para Retirada de Exames |
+| `SE` | Senha para retirada de Exames |
 
-## ⚙️ Regras de Atendimento
-
-A regra geral de priorização será:
-
-```text
-SP → SE/SG → SP → SE/SG
-```
-
-As principais regras são:
-
-- `SP` possui maior prioridade;
-- `SG` possui menor prioridade;
-- `SE` possui atendimento operacional especial e deverá ser chamada após uma `SP`, quando disponível;
-- qualquer guichê poderá atender qualquer tipo de senha;
-- caso uma das filas esteja vazia, o sistema deverá selecionar a próxima senha disponível respeitando as regras de prioridade;
-- uma senha que não for atendida após duas chamadas deverá ser considerada como `NÃO_COMPARECEU`;
-- aproximadamente 5% das senhas emitidas deverão ser consideradas como não atendidas, conforme a especificação do projeto;
-- o expediente deverá ocorrer das **07:00 às 17:00**;
-- atendimentos já iniciados deverão ser concluídos;
-- ao final do expediente, senhas que ainda estiverem aguardando deverão ser descartadas.
-
-## 🔢 Numeração das Senhas
-
-As senhas deverão seguir o padrão:
+A numeração das senhas deverá seguir o padrão:
 
 ```text
 YYMMDD-PPSQ
@@ -141,25 +100,45 @@ YYMMDD-PPSQ
 
 Onde:
 
-| Código | Significado |
-| --- | --- |
-| `YY` | Ano da emissão com dois dígitos |
-| `MM` | Mês da emissão com dois dígitos |
-| `DD` | Dia da emissão com dois dígitos |
-| `PP` | Tipo da senha |
-| `SQ` | Sequência da senha com três dígitos |
-
-A sequência deverá ser reiniciada diariamente para cada tipo de senha.
+- `YY` — ano da emissão;
+- `MM` — mês da emissão;
+- `DD` — dia da emissão;
+- `PP` — tipo da senha;
+- `SQ` — sequência de três dígitos, reiniciada diariamente por tipo.
 
 Exemplo:
 
 ```text
-261003-SP001
+261004-SP001
 ```
 
-## 🔄 Estados das Senhas
+---
 
-Durante o atendimento, uma senha poderá passar pelos seguintes estados:
+## Regras de Atendimento
+
+A ordem de priorização definida para o sistema é:
+
+```text
+SP → SE/SG → SP → SE/SG
+```
+
+As principais regras previstas são:
+
+- SP possui maior prioridade;
+- SG possui menor prioridade;
+- SE possui tratamento operacional especial;
+- qualquer guichê poderá atender qualquer tipo de senha;
+- uma senha poderá ser chamada novamente;
+- após duas chamadas sem comparecimento, a senha poderá ser considerada como não comparecimento;
+- o expediente previsto é das 7h às 17h;
+- atendimentos iniciados antes do encerramento do expediente deverão ser concluídos;
+- senhas restantes na fila ao final do expediente deverão ser descartadas.
+
+---
+
+## Máquina de Estados
+
+As senhas deverão seguir a máquina de estados definida na especificação:
 
 ```text
 EMITIDA
@@ -183,37 +162,70 @@ NÃO_COMPARECEU
 
 quando o cliente não comparecer após as chamadas previstas.
 
-## 📺 Painel de Chamadas
+---
 
-O painel deverá apresentar as **5 últimas senhas chamadas**.
+## Painel de Chamadas
 
-A próxima senha não deverá ser exibida antecipadamente.
+O painel deverá apresentar as **5 últimas senhas chamadas**, juntamente com as informações necessárias para direcionar o cliente ao respectivo guichê.
 
-O atendente deverá possuir as opções de:
+A próxima senha da fila não deverá ser exibida antecipadamente.
 
-- chamar uma nova senha;
-- iniciar o atendimento;
-- finalizar o atendimento;
-- chamar novamente uma senha.
+---
 
-## 📊 Relatórios
+## Relatórios
 
-O sistema deverá contemplar relatórios diários e mensais contendo:
+O sistema deverá contemplar relatórios diários e mensais contendo informações como:
 
-- quantidade geral de senhas emitidas;
-- quantidade geral de senhas atendidas;
-- quantidade de senhas emitidas por prioridade;
-- quantidade de senhas atendidas por prioridade;
-- relatório detalhado das senhas;
+- quantidade de senhas emitidas;
+- quantidade de senhas atendidas;
+- senhas emitidas por tipo;
+- senhas atendidas por tipo;
+- informações detalhadas dos atendimentos;
 - tempo médio de atendimento;
-- relatório de auditoria.
+- informações de auditoria.
 
-## 📁 Estrutura do Projeto
+---
+
+## Arquitetura
+
+O projeto está organizado utilizando uma arquitetura Web dividida em três partes principais:
+
+```text
+┌──────────────────────┐
+│       Frontend       │
+│        React         │
+└──────────┬───────────┘
+           │
+           │ API REST / JSON
+           ▼
+┌──────────────────────┐
+│       Backend        │
+│ Node.js + Express    │
+└──────────┬───────────┘
+           │
+           │ mysql2
+           ▼
+┌──────────────────────┐
+│   Banco de Dados     │
+│      MySQL 8.0       │
+└──────────────────────┘
+```
+
+---
+
+## Estrutura do Projeto
 
 ```text
 nassauTickets/
-│
 ├── backend/
+│   ├── database/
+│   └── src/
+│       ├── config/
+│       ├── controllers/
+│       ├── middlewares/
+│       ├── repositories/
+│       ├── routes/
+│       └── services/
 │
 ├── docs/
 │   ├── branding/
@@ -230,94 +242,191 @@ nassauTickets/
 └── README.md
 ```
 
-### Documentação
+A pasta `docs/` concentra os artefatos de documentação, incluindo requisitos, modelos, diagramas UML, MER e mockups.
 
-A pasta `docs/` será utilizada para armazenar os artefatos de documentação:
+---
 
-- `docs/branding/` — identidade visual;
-- `docs/mer/` — Modelo Entidade-Relacionamento;
-- `docs/mockups/` — mockups e protótipos;
-- `docs/models/uml/` — diagramas UML;
-- `docs/requirements/` — requisitos e regras de negócio.
+## Branches
 
-## 🌿 Branches
-
-O projeto utiliza duas branches principais:
+O projeto utiliza principalmente as branches:
 
 ### `main`
 
-Destinada às versões estáveis do projeto.
+Branch destinada às versões integradas e estáveis do projeto.
 
 ### `dev`
 
-Destinada ao desenvolvimento das funcionalidades.
+Branch principal de desenvolvimento.
 
-O desenvolvimento deverá ocorrer inicialmente na branch `dev`.
+As funcionalidades são desenvolvidas e versionadas antes de serem posteriormente integradas à `main`.
 
-Após a implementação e validação das funcionalidades, as alterações serão integradas à `main` por meio de merge.
+Também poderão ser utilizadas branches auxiliares para desenvolvimento isolado de funcionalidades, que posteriormente serão integradas à `dev`.
+
+Fluxo geral:
 
 ```text
-Desenvolvimento
-      │
-      ▼
-     dev
-      │
-      │ merge
-      ▼
-     main
+feature/*
+     │
+     ▼
+    dev
+     │
+     ▼
+   main
 ```
 
-## 🚀 Instalação e Execução
+---
 
-> As instruções desta seção poderão ser atualizadas conforme o desenvolvimento do projeto.
+## Backend
 
-### Pré-requisitos
+O backend está sendo desenvolvido utilizando **Node.js 22 LTS com Express**.
 
-Para executar o projeto será necessário possuir:
+O código encontra-se em:
 
-- Git;
-- Node.js 22 LTS;
-- npm;
-- MySQL 8.0.
-
-### 1. Clonar o repositório
-
-```bash
-git clone https://github.com/francinhaxzz/nassauTickets.git
+```text
+backend/
 ```
 
-### 2. Entrar no projeto
+### Instalação das dependências
 
-```bash
-cd nassauTickets
-```
-
-### 3. Acessar a branch de desenvolvimento
-
-```bash
-git switch dev
-```
-
-### Frontend
-
-Quando configurado, o frontend poderá ser executado a partir do diretório `frontend`:
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-### Backend
-
-Quando configurado, o backend poderá ser executado a partir do diretório `backend`:
+Entre no diretório:
 
 ```bash
 cd backend
+```
+
+Instale as dependências:
+
+```bash
 npm install
+```
+
+### Executando em desenvolvimento
+
+```bash
 npm run dev
 ```
 
-## 🔐 Configuração
+### Executando normalmente
 
-As informações de configuração do sistema, incluindo a conexão com o banco de dados, serão
+```bash
+npm start
+```
+
+Por padrão, a API utiliza a porta definida na variável de ambiente `PORT`.
+
+---
+
+## Configuração do Backend
+
+As informações sensíveis e específicas de cada ambiente não são versionadas no GitHub.
+
+Crie um arquivo:
+
+```text
+backend/.env
+```
+
+utilizando como referência o arquivo:
+
+```text
+backend/.env.example
+```
+
+Exemplo de configuração:
+
+```env
+PORT=3000
+
+DB_HOST=localhost
+DB_PORT=3306
+DB_USER=root
+DB_PASSWORD=sua_senha
+DB_NAME=nassau_tickets
+```
+
+> O arquivo `.env` não deve ser enviado ao repositório.
+
+---
+
+## Banco de Dados
+
+O projeto utiliza **MySQL 8.0**.
+
+Os scripts relacionados à criação e configuração do banco de dados são mantidos em:
+
+```text
+backend/database/
+```
+
+O banco utilizado pela aplicação é:
+
+```text
+nassau_tickets
+```
+
+---
+
+## Frontend
+
+O frontend será desenvolvido utilizando **React** e permanecerá integralmente dentro do diretório:
+
+```text
+frontend/
+```
+
+A implementação do frontend faz parte da evolução do projeto e será integrada às APIs disponibilizadas pelo backend.
+
+---
+
+## Documentação
+
+A documentação do projeto está disponível em:
+
+```text
+docs/
+```
+
+Ela contempla artefatos relacionados a:
+
+- requisitos funcionais;
+- requisitos não funcionais;
+- regras de negócio;
+- casos de uso;
+- diagramas UML;
+- Modelo Entidade-Relacionamento (MER);
+- mockups;
+- aspectos de segurança;
+- disponibilidade;
+- auditoria;
+- desempenho;
+- concorrência;
+- LGPD;
+- acessibilidade.
+
+---
+
+## Status de Desenvolvimento
+
+O projeto encontra-se em desenvolvimento.
+
+Nesta primeira fase foram priorizados:
+
+- criação e organização do repositório;
+- definição da equipe e dos papéis;
+- estruturação das branches;
+- documentação inicial;
+- levantamento de requisitos;
+- modelagem do sistema;
+- estrutura inicial do backend;
+- estrutura do banco de dados;
+- início da implementação das APIs.
+
+As demais funcionalidades serão implementadas progressivamente nas próximas etapas do projeto.
+
+---
+
+## Licença
+
+Este projeto utiliza a licença **MIT**.
+
+Consulte o arquivo [LICENSE](LICENSE) para mais informações.
